@@ -1,5 +1,5 @@
 interface InputProps {
-  variant: 'radio' | 'number' | 'text' | 'email'
+  variant: 'radio' | 'number' | 'text' | 'email' | 'textarea'
   id: string
   value: string | number | undefined
   label: string
@@ -20,16 +20,53 @@ export default function DonateInputs({
 }: InputProps) {
   const { variant = 'radio' } = props
 
+  if (variant === 'text') {
+    return (
+      <label htmlFor={id} className="col-span-3 group space-y-1">
+        <span className="font-semibold text-gray-dark text-base">{label}</span>
+        <input
+          autoComplete={id}
+          className="block border-2 border-gray-light rounded-xl px-3 py-2 w-full"
+        />
+      </label>
+    )
+  }
+
+  if (variant === 'email') {
+    return (
+      <label htmlFor={id} className="col-span-3 group space-y-1">
+        <span className="font-semibold text-gray-dark text-base">{label}</span>
+        <input
+          autoComplete="email"
+          placeholder="hey@youarerad.org"
+          className="block border-2 border-gray-light rounded-xl px-3 py-2 w-full"
+        />
+      </label>
+    )
+  }
+
+  if (variant === 'textarea') {
+    return (
+      <label className="inline-flex flex-col space-y-1 col-span-3">
+        <span className="font-semibold text-gray-dark text-base">{label}</span>
+        <textarea
+          className="block border-2 border-gray-light rounded-xl px-3 py-2 w-full"
+          rows={4}
+        />
+      </label>
+    )
+  }
+
   if (variant === 'number') {
     return (
-      <label htmlFor={id} className="col-span-2 h-full">
+      <label htmlFor={id} className="col-span-2 h-full group">
         <input
           id={id}
           type="number"
           value={value}
           name={id}
           onChange={onChange}
-          className="block group border-2 border-gray-light appearance-none outline-none rounded-xl relative px-3 py-2 text-base bg-white w-full h-full"
+          className="block group border-2 border-gray-light appearance-none outline-none rounded-xl relative px-3 py-2 text-base bg-white w-full h-full group-hover:border-secondary group-focus:border-secondary"
           placeholder="Enter custom amount..."
         />
       </label>

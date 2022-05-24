@@ -1,7 +1,7 @@
 import Stripe from 'stripe'
 import { stripe } from '@libs/stripe'
 
-const ORIGIN_URL = 'https://localhost:3000' ?? 'https://youarerad.org'
+const ORIGIN_URL = 'https://youarerad.org' ?? 'https://localhost:3000'
 
 export async function createOneTimeDonation(amount: number) {
   const params: Stripe.Checkout.SessionCreateParams = {
